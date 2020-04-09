@@ -1,0 +1,605 @@
+{
+	"info": {
+		"_postman_id": "7526ead7-030e-4d56-9b1a-ef518c1a67eb",
+		"name": "E-FOTA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "V2",
+			"item": [
+				{
+					"name": "Get License Info",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2e4fd6dd-5f74-4d54-9122-64fb05d4a788",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bLicenseInfoVO>\n    <mdmId>{{efota_mdmId}}</mdmId>\n    <customerId>{{efota_customerId}}</customerId>\n    <license>{{efota_license}}</license>\n</B2bLicenseInfoVO>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/licenseInfo",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"licenseInfo"
+							]
+						},
+						"description": "API returns information about the Knox E-FOTA license."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Firmware List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bFirmwareInfoListVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <license>{{efota_license}}</license>\n  <deviceModelName>SM-T830</deviceModelName>\n  <salesCode>XAR</salesCode>\n  <languageCode>ENG</languageCode>\n</B2bFirmwareInfoListVO>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/firmwareList",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"firmwareList"
+							]
+						},
+						"description": "API returns a list of firmware versions available for update."
+					},
+					"response": []
+				},
+				{
+					"name": "Force Update List of Devices by Serial Number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bForceUpdateVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <license>{{efota_license}}</license>\n  <deviceModelName>SM-T830</deviceModelName>\n  <salesCode>XAR</salesCode>\n  <targetFirmwareVersion>T830XXU4BTB2.DM/T830OXM4BTB2/</targetFirmwareVersion>\n  <networkType>ANY</networkType>\n  <deviceList>\n    <serialNumber>R52K70QV64Z</serialNumber>\n  </deviceList>\n</B2bForceUpdateVO>",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/forceUpdate",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"forceUpdate"
+							]
+						},
+						"description": "API pushes a force update to a list of Knox E-FOTA devices."
+					},
+					"response": []
+				},
+				{
+					"name": "Force Update Summary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bForceUpdateSummaryVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <license>{{efota_license}}</license>\n  <forceUpdateId>48920200409-JEA35721223</forceUpdateId>\n</B2bForceUpdateSummaryVO>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/forceUpdateSummary",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"forceUpdateSummary"
+							]
+						},
+						"description": "API returns a force update summary that includes a count of the devices that has currently downloaded, failed to download or are currently processing a target firmware update. Note that the API call is only available for 3 months after the force update ID is generated."
+					},
+					"response": []
+				},
+				{
+					"name": "Force Update Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bForceUpdateDetailVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <license>{{efota_license}}</license>\n  <forceUpdateId>48920200409-JEA35721223</forceUpdateId>\n</B2bForceUpdateDetailVO>",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/forceUpdateDetail",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"forceUpdateDetail"
+							]
+						},
+						"description": "API returns a list of devices that have not yet successfully downloaded the force update. These devices include those still processing or that have failed to download the push update.Note that the API call is only available for 3 months after the force update ID is generated."
+					},
+					"response": []
+				},
+				{
+					"name": "Group Register Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bGroupRegisterVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <groupId>{{efota_groupId}}</groupId>\n  <license>{{efota_license}}</license>\n</B2bGroupRegisterVO>",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/groupRegister",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"groupRegister"
+							]
+						},
+						"description": "API to register a group of devices associated to a group ID to a Knox E-FOTA license."
+					},
+					"response": []
+				},
+				{
+					"name": "Group License Change",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bGroupLicenseChangeVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <groupId>{{efota_groupId}}</groupId>\n  <license>{{efota_license}}</license>\n  <newLicense>{{efota_license}}</newLicense>\n</B2bGroupLicenseChangeVO>",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/groupLicenseChange",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"groupLicenseChange"
+							]
+						},
+						"description": "API to change the Knox E-FOTA license associated to a group ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Abnormal Device List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{efota_current_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<B2bAbnormalDeviceListVO>\n  <mdmId>{{efota_mdmId}}</mdmId>\n  <customerId>{{efota_customerId}}</customerId>\n  <license>{{efota_license}}</license>\n  <deviceList>\n    <serialNumber>{{efota_device_SN_1}}</serialNumber>\n  </deviceList>\n</B2bAbnormalDeviceListVO>",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://eu-api.samsungknox.com/b2bfota/v2/abnormalDeviceList",
+							"protocol": "https",
+							"host": [
+								"eu-api",
+								"samsungknox",
+								"com"
+							],
+							"path": [
+								"b2bfota",
+								"v2",
+								"abnormalDeviceList"
+							]
+						},
+						"description": "API to return the fail status of a list of devices that were unable to enrol into the Knox E-FOTA service."
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2da286e1-9b5d-4239-b595-6146a81ed1e0",
+						"type": "text/javascript",
+						"exec": [
+							"var client_id = pm.environment.get(\"efota_client_id\");",
+							"var client_secret = pm.environment.get(\"efota_client_secret\");",
+							"var token_endpoint = pm.environment.get(\"efota_token_endpoint\");",
+							"var grant_type = pm.environment.get(\"grant_type\");",
+							"",
+							"",
+							"const echoPostRequest = {",
+							"  url: token_endpoint,",
+							"  method: 'POST',",
+							"  header: 'Content-Type:application/x-www-form-urlencoded',",
+							"  body: {",
+							"      mode: 'urlencoded',",
+							"      urlencoded: [",
+							"        {key: 'grant_type', value: grant_type, disabled: false},",
+							"        {key: 'client_id', value: client_id, disabled: false},",
+							"        {key: 'client_secret', value: client_secret, disabled: false}",
+							"      ]",
+							"  }",
+							"};",
+							"",
+							"var getToken = true;",
+							"",
+							"if (!pm.environment.get('efota_access_token_expiry') || ",
+							"    !pm.environment.get('efota_current_access_token')) {",
+							"    console.log('Token or expiry date are missing')",
+							"} else if (pm.environment.get('efota_access_token_expiry') <= (new Date()).getTime()) {",
+							"    console.log('Token is expired')",
+							"} else {",
+							"    getToken = false;",
+							"    console.log('Token and expiry date are all good');",
+							"}",
+							"",
+							"if (getToken === true) {",
+							"    pm.sendRequest(echoPostRequest, function (err, res) {",
+							"    console.log(err ? err : res.json());",
+							"        if (err === null) {",
+							"            console.log('Saving the token and expiry date')",
+							"            var responseJson = res.json();",
+							"            pm.environment.set('efota_current_access_token', responseJson.access_token)",
+							"    ",
+							"            var expiryDate = new Date();",
+							"            expiryDate.setSeconds(expiryDate.getSeconds() + responseJson.expires_in);",
+							"            pm.environment.set('efota_access_token_expiry', expiryDate.getTime());",
+							"        }",
+							"    });",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad13a419-507c-4199-a859-06a51e760d67",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get OAuth 2.0 Access Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "96731e74-0f9f-4928-bcbc-7c2c27503e9a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "JSON is not supported; must use x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{efota_client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{efota_client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "{{grant_type}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://eu-api.samsungknox.com/iam/auth/oauth/v2/token",
+					"protocol": "https",
+					"host": [
+						"eu-api",
+						"samsungknox",
+						"com"
+					],
+					"path": [
+						"iam",
+						"auth",
+						"oauth",
+						"v2",
+						"token"
+					]
+				},
+				"description": "Access token is valid for one hour."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e5f3765e-3a04-4426-a478-912d6473619b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9d40fa7a-5a33-4efd-bfd7-6a024974a241",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

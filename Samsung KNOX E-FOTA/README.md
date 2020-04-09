@@ -36,3 +36,6 @@ Outputs a log file called "Update-DeviceFirmwareWithEFOTA_Log.txt" in the workin
 
 ## NOTES
 Author: Aron Aperauch
+
+## POSTMAN
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6666273fd3603aa6c45b)
