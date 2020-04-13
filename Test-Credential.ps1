@@ -53,7 +53,7 @@ function Test-Cred {
         $_.Exception.Message
         Continue
     }
-  
+
     If(!$domain)
     {
         Write-Warning "Something went wrong"
@@ -62,13 +62,16 @@ function Test-Cred {
     {
         If ($domain.name -ne $null)
         {
-            return "Authenticated"
+            Set-Variable -Name "auth" -Value 1
+            Write-Host $auth
+            Write-Host "Authenticated"
+           
         }
         Else
         {
-            return "Not authenticated"
+            Set-Variable -Name "auth" -Value 0
+            Write-Host $auth
+            Write-Host "Not authenticated"
         }
     }
 }
-
-Test-Cred
