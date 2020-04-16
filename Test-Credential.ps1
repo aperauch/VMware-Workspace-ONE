@@ -15,18 +15,18 @@ function Test-Cred {
         [ValidateNotNull()] 
         [System.Management.Automation.PSCredential]
         [System.Management.Automation.Credential()] 
-        $Credentials
+        $script:Credentials
     )
     $Domain = $null
     $Root = $null
-    $Username = $null
-    $Password = $null
+    $script:Username = $null
+    $script:Password = $null
       
-    If($Credentials -eq $null)
+    If($script:Credentials -eq $null)
     {
         Try
         {
-            $Credentials = Get-Credential "domain\$env:username" -ErrorAction Stop
+            $script:Credentials = Get-Credential "domain\$env:username" -ErrorAction Stop
         }
         Catch
         {
@@ -56,7 +56,8 @@ function Test-Cred {
 
     If(!$domain)
     {
-        Write-Warning "Something went wrong"
+        Write-Warning "Something went wrong, can't find domain"
+        Break
     }
     Else
     {
@@ -72,6 +73,7 @@ function Test-Cred {
             Set-Variable -Name "auth" -Value 0
             Write-Host $auth
             Write-Host "Not authenticated"
+            Break
         }
     }
 }
